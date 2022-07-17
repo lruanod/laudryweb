@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Categorias" table="categorias" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="idcategorias" type="java.lang.Integer">
+            <column name="idcategorias" />
+            <generator class="identity" />
+        </id>
+        <property name="categoria" type="string">
+            <column name="categoria" length="45" not-null="true" />
+        </property>
+        <set name="servicios" table="servicio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idcategorias" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Servicio" />
+        </set>
+    </class>
+</hibernate-mapping>

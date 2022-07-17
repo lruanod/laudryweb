@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Factura" table="factura" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="nofactura" type="java.lang.Integer">
+            <column name="nofactura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sucursal" class="modelos.Sucursal" fetch="select">
+            <column name="idsucursal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelos.Usuario" fetch="select">
+            <column name="idusuario" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="recargo" type="big_decimal">
+            <column name="recargo" precision="12" />
+        </property>
+        <property name="descuento" type="big_decimal">
+            <column name="descuento" precision="12" not-null="true" />
+        </property>
+        <property name="total" type="big_decimal">
+            <column name="total" precision="12" not-null="true" />
+        </property>
+        
+        <property name="entrega" type="string">
+            <column name="entrega" length="65" not-null="true" />
+        </property>
+        
+        <property name="estado" type="string">
+            <column name="estado" length="65" not-null="true" />
+        </property>
+        
+        
+        
+        
+        <set name="ordenoperadors" table="ordenoperador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nofactura" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenoperador" />
+        </set>
+        <set name="ordenrepartidors" table="ordenrepartidor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nofactura" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenrepartidor" />
+        </set>
+        <set name="ordenadmins" table="ordenadmin" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nofactura" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenadmin" />
+        </set>
+        <set name="detalles" table="detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idfactura" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Detalle" />
+        </set>
+    </class>
+</hibernate-mapping>

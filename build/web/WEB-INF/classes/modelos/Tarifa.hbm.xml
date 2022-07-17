@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Tarifa" table="tarifa" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="idtarifa" type="java.lang.Integer">
+            <column name="idtarifa" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="servicio" class="modelos.Servicio" fetch="select">
+            <column name="idservicio" not-null="true" />
+        </many-to-one>
+        <property name="nombreser" type="string">
+            <column name="nombreser" length="100" not-null="true" />
+        </property>
+        <property name="tarifaSer" type="big_decimal">
+            <column name="tarifa_ser" precision="12" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Sucursal" table="sucursal" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="idsucursal" type="java.lang.Integer">
+            <column name="idsucursal" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="municipio" class="modelos.Municipio" fetch="select">
+            <column name="idmunicipio" not-null="true" />
+        </many-to-one>
+        <property name="nombreSucursal" type="string">
+            <column name="nombre_sucursal" length="60" not-null="true" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" length="45" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" not-null="true" />
+        </property>
+        <set name="operadorsucursals" table="operadorsucursal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idsucursal" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Operadorsucursal" />
+        </set>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idsucursal" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Factura" />
+        </set>
+    </class>
+</hibernate-mapping>

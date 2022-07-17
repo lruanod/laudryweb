@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Ordenoperador" table="ordenoperador" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="idordenoperador" type="java.lang.Integer">
+            <column name="idordenoperador" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="factura" class="modelos.Factura" fetch="select">
+            <column name="nofactura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelos.Usuario" fetch="select">
+            <column name="idusuario" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="65" not-null="true" />
+        </property>
+        <property name="estimaciontiempo" type="string">
+            <column name="estimaciontiempo" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

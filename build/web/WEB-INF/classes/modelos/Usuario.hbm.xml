@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2017 02:15:25 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelos.Usuario" table="usuario" catalog="lavaweb_hiber" optimistic-lock="version">
+        <id name="idusuario" type="java.lang.Integer">
+            <column name="idusuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="municipio" class="modelos.Municipio" fetch="select">
+            <column name="idmunicipio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipousuario" class="modelos.Tipousuario" fetch="select">
+            <column name="idtipousuario" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="60" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="60" not-null="true" />
+        </property>
+        <property name="nit" type="string">
+            <column name="nit" length="45" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="70" not-null="true" />
+        </property>
+        <property name="descripcionCasa" type="string">
+            <column name="descripcion_casa" length="100" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="60" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="45" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="60" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="45" not-null="true" />
+        </property>
+        <property name="tel" type="string">
+            <column name="tel" length="45" not-null="false" />
+        </property>
+        <property name="cel" type="string">
+            <column name="cel" length="45" not-null="false" />
+        </property>
+        <property name="dpi" type="string">
+            <column name="dpi" length="15" not-null="false" />
+        </property>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Factura" />
+        </set>
+        <set name="ordenadmins" table="ordenadmin" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenadmin" />
+        </set>
+        <set name="ordenoperadors" table="ordenoperador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenoperador" />
+        </set>
+        <set name="ordenrepartidors" table="ordenrepartidor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Ordenrepartidor" />
+        </set>
+        <set name="operadorsucursals" table="operadorsucursal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Operadorsucursal" />
+        </set>
+        <set name="usuariomiembros" table="usuariomiembro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idusuario" not-null="true" />
+            </key>
+            <one-to-many class="modelos.Usuariomiembro" />
+        </set>
+    </class>
+</hibernate-mapping>
